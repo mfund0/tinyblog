@@ -1,0 +1,36 @@
+Hello,
+
+Thank you for reaching out to us.
+
+From your case description, I can understand that you would like to find out how to upload excel data into a dynamodb table.
+
+Q: Do I need to manipulate data before uploading?
+A: Yes. DynamoDB stores Data in the for of "Items" in a Table. An Item is defined as a collection of attributes, with each attribute having a name and a value and when you make. Hence your data has to be presented in a format that is according to that definition and also the structure of your payload has to be what is expected by the API. Refer to this documentation[1] for the API used to put an item into a DynamoDB table. If you use the SDK[2], you would have to present your data as described above.
+
+
+Q: Is there any tool available I can check if the JSON data fits to DynamoDB before actual upload?
+A: We do not have a tool that does that out of the box, but Again using one of our SDK I suppose one can possibly be implemented.
+
+Q: Do you have any CLI tool to check such validity of data and upload it ? 
+A: We do not have such a tool.
+
+Depending on how Big your Data is two options that can be used:
+1. Write code using one of our SDK's - that loads parts of the file (Let's assume the Excel is exported as a CSV) into memory, prepares it to a format that can be intergrated with the interface exposed by the SDK.
+
+2. Export the Excel files into a CSV , use Hive on the EMR Service and the DynamoDB storage handler to load your data into the a DynamoDB table.
+
+3. Use DataPipeline[4] to import a CSV Data to DynamoDB 
+
+
+[1] DynamoDb Low-Level API:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html
+
+[2] Examples of operations on DynamoDB using Boto3 (Our python SDK):
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.03.html
+
+[3] Using Hive on an EMR Cluster to load data into DynamoDB + The DynamoDBStorageHandler for Hive:
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EMRforDynamoDB.Tutorial.CopyDataToDDB.html
+
+[4] DataPipeline Sample templates + DynamoDB Import/Export Tutorial:
+https://github.com/aws-samples/data-pipeline-samples/tree/master/samples/DynamoDBImportCSV
+https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-importexport-ddb.html
