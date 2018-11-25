@@ -3,8 +3,9 @@
 {% block content %}
 	<br/><br/>
 	<div class="container">
-		<p>
-			{{ content|safe }}
-		</p>
+		<span class="grey-text text-lighten-1">{{timestamp}} : {{ title }}</span>
+	</div>
+	<div class="container">
+			{{ content|markdown|safe }}
 	</div>
 {% endblock %}

@@ -2,12 +2,12 @@ import os, sys, mistune, datetime
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import Markup
-from Renderer import Renderer
+from flaskext.markdown import Markdown
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
 app = Flask(__name__)
+Markdown(app,  extensions=['codehilite'])
 app.debug = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'pages.db') #+/pages.db' % os.getcwd()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -33,10 +33,8 @@ class Pages(db.Model):
         db.session.add(self)
         db.session.commit()
     
-
     def __repr__(self):
         return '<Page: id={}, title={},  content={}, timestamp={}>'.format(self.id,self.title,self.content, self.timestamp)
-    
     
 @app.route('/')
 def index():
@@ -46,10 +44,7 @@ def index():
 @app.route('/page/<int:page_id>')
 def view(page_id):
     page = db.session.query(Pages).filter_by(id=page_id).first()
-    render = Renderer()
-    markdown = mistune.Markdown(render=render)
-    content = markdown(page.content)
-    return render_template('page.html',id=page_id , title=page.title, content=content)
+    return render_template('page.html',id=page_id , title=page.title, content=page.content, timestamp=page.timestamp)
 
 
 if __name__ == '__main__':

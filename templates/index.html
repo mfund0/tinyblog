@@ -3,20 +3,21 @@
 	<br/>
 	<br/>
 	<br/>
-	
-	{% for page in pages %}
-	<div class="section">
-		<a href="{{ url_for('view', page_id=page.id) }}" ><h3 class="demo-panel-title">{{ page.title|truncate(10) }}</h3></a>
-		<p>{{ page.timestamp }}</p>
-		<p class="palette-paragraph" >
-			<h6 class="palette-headline">
-					<span class="grey-text text-lighten-1">
-						{{ page.content|truncate(80) }}
-					</span>
-			</h6>
-		</p>
-	</div>
-	<div class="divider"></div>
-	{% endfor %}
+	<div class="container">
+		{% for page in pages %}
+		<div class="section">
+			<a href="{{ url_for('view', page_id=page.id) }}" ><h3 class="demo-panel-title">{{ page.title|truncate(10) }}</h3></a>
+			<p>{{ page.timestamp }}</p>
+			<p class="palette-paragraph" >
+				<h6 class="palette-headline">
+						<span class="grey-text text-lighten-1">
+							{{ page.content[10:]| markdown |truncate(80) }}
+						</span>
+				</h6>
+			</p>
+		</div>
+		<div class="divider"></div>
+		{% endfor %}
+		</div>
 	</div>
 {% endblock %}
