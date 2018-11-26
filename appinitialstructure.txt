@@ -1,4 +1,4 @@
-import os, sys, mistune, datetime
+import os, sys, datetime
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import Markup
@@ -9,7 +9,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 Markdown(app,  extensions=['codehilite'])
 app.debug = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'pages.db') #+/pages.db' % os.getcwd()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'pages.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
