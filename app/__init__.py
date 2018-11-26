@@ -3,9 +3,9 @@ from flask import Flask
 from flaskext.markdown import Markdown
 from config import Config
 
+
 #Create an insatnce of db that is not attached to an app
 db = SQLAlchemy()
-
 
 def create_app(config_class=Config):
     '''Application factory function'''
