@@ -19,4 +19,4 @@ dbserver:
   ports:
     - 3306:33060
   volumes:
-    db_volume
+    [db_volume]
