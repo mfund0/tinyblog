@@ -5,8 +5,6 @@ blogapp:
     - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
   ports: 
     - 8000:5000
-  depends_on:
-    - postgres 
 
 dbserver:
   container_name: "mysql_db_server"
