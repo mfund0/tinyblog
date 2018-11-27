@@ -1,6 +1,8 @@
 blogapp:
   container_name: "blogapp"
   build: .
+  links:
+  - dbserver
   environment:
     - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
   ports: 
