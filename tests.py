@@ -1,6 +1,7 @@
 import unittest
 from config import Config
 from app import db, create_app
+from app.models import Pages
 
 class TestConfig(Config):
     '''Test configuration'''

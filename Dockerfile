@@ -26,6 +26,7 @@ COPY blog.py config.py boot.sh ./
 RUN chmod +x boot.sh
 
 ENV FLASK_APP blog.py
+ENV FLASK_ENV docker
 
 RUN chown -R tinyflaskblog:tinyflaskblog ./
 USER tinyflaskblog

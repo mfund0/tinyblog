@@ -1,0 +1,22 @@
+blogapp:
+  container_name: "blogapp"
+  build: .
+  environment:
+    - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
+  ports: 
+    - 8000:5000
+  depends_on:
+    - postgres 
+
+dbserver:
+  container_name: "mysql_db_server"
+  image: mysql/mysql-server:5.7
+  environment: 
+    - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_RANDOM_ROOT_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  ports:
+    - 3306:33060
+  volumes:
+    db_volume
