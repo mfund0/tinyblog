@@ -1,6 +1,7 @@
 # Tinyflaskblog
 
 ##Structure:
+```
 .
 ├── app
 │   ├── __init__.py
@@ -31,3 +32,4 @@
 ├── requirements.txt
 ├── tests.py
 └── venv/
+```
