@@ -1,6 +1,6 @@
 # Tinyflaskblog
 
-##Structure:
+Structure:
 ```
 .
 ├── app
