@@ -26,6 +26,5 @@
 ├── monolith.py
 ├── README.md
 ├── requirements.txt
-├── run_containers.sh
 ├── tests.py
 └── venv/
