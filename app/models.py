@@ -15,6 +15,7 @@ class Pages(db.Model):
         self.timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def commit_page(self):
+        db.create_all()
         db.session.add(self)
         db.session.commit()
     
