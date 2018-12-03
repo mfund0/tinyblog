@@ -31,5 +31,4 @@ ENV FLASK_ENV docker
 RUN chown -R tinyflaskblog:tinyflaskblog ./
 USER tinyflaskblog
 
-EXPOSE 5000
 ENTRYPOINT ["./boot.sh"]

@@ -6,8 +6,8 @@ blogapp:
   - dbserver
   environment:
     - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
-  ports: 
-    - 8000:5000
+  expose: 
+    - 8000
 
 dbserver:
   container_name: "mysql_db_server"
@@ -22,12 +22,15 @@ dbserver:
   volumes:
     - my-data:/var/lib/mysql
 nginx:
-  container_name: nginx
-  build: ./nginx/
-  links: 
+  restart: always
+  image: nginx
+  volumes:
+    - ./nginx/:/etc/nginx/conf.d
+    - ./app/static:/app/static
+  links:
     - blogapp
   ports:
-      - 8080:80
+      - 80:80
   environment: 
     - USE_LISTEN_PORT=${USE_LISTEN_PORT}
     - USE_STATIC_PATH=${USE_STATIC_PATH}
