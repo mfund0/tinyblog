@@ -1,3 +1,4 @@
+
 blogapp:
   container_name: "blogapp"
   build: .
@@ -19,7 +20,7 @@ dbserver:
   ports:
     - 3306:33060
   volumes:
-    [db_volume]
+    - my-data:/var/lib/mysql
 nginx:
   container_name: nginx
   build: ./nginx/

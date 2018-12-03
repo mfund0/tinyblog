@@ -9,4 +9,4 @@ RUN chmod +x ./boot.sh
 
 COPY nginx.j2 ./
 
-ENTRYPOINT [./boot.sh"]
+ENTRYPOINT ["./boot.sh"]
