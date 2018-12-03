@@ -20,3 +20,15 @@ dbserver:
     - 3306:33060
   volumes:
     [db_volume]
+nginx:
+  container_name: nginx
+  build: ./nginx/
+  links: 
+    - blogapp
+  ports:
+      - 8080:80
+  environment: 
+    - USE_LISTEN_PORT=${USE_LISTEN_PORT}
+    - USE_STATIC_PATH=${USE_STATIC_PATH}
+    - NGINX_LOGS=${NGINX_LOGS}
+    - USE_STATIC_URL=${USE_STATIC_URL}

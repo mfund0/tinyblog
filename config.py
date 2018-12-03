@@ -16,7 +16,5 @@ class DockerConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get(
             "DATABASE_URL"
         )
-    
-    "mysql+pymysql://blog:<database-password>@dbserver/pages"
 
 config = {"dev": DevConfig,"docker": DockerConfig}
