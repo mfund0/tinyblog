@@ -1,6 +1,7 @@
 # Tinyflaskblog
 
 Structure:
+```
 .
 ├ app
 │   ├ __init__.py
@@ -33,7 +34,7 @@ Structure:
 ├ README.md
 ├ requirements.txt
 ├ structure
-└ tests.py```
+└ tests.py
 
 ```
 
