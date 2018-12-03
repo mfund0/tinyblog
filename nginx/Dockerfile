@@ -8,5 +8,4 @@ COPY boot.sh ./
 RUN chmod +x ./boot.sh
 
 COPY nginx.j2 ./
-
 ENTRYPOINT ["./boot.sh"]

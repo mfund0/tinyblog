@@ -17,11 +17,11 @@ http {
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         }
 
-        location $USE_STATIC_URL {
+        location /static {
             access_log   off;
             expires      30d;
 
-            alias {{ USE_STATIC_PATH }};
+            alias app/static;
         }
     }
  }
