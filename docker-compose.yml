@@ -8,6 +8,7 @@ blogapp:
     - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
   expose: 
     - 8000
+  env_file: .env
 
 dbserver:
   container_name: "mysql_db_server"
