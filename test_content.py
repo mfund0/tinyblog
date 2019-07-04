@@ -10,16 +10,15 @@ requests_log.setLevel(logging.DEBUG)
 requests_log.propagate = True
 
 
-url = ""
+url = "<endpoint>"
 
 content = open('content.md','r')
 
-#Python dict
 json_data = {
     'title':'test_for_balakriu',
     'content':content.read()
 }
-while true:
+
 req = requests.Request('POST',url,headers={'Content-Type':'application/json'},data=json.dumps(json_data))
 prepared = req.prepare()
 s = requests.Session()
