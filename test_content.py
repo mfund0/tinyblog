@@ -9,9 +9,6 @@ requests_log = logging.getLogger("requests.packages.urllib3")
 requests_log.setLevel(logging.DEBUG)
 requests_log.propagate = True
 
-
-url = "<endpoint>"
-
 content = open('content.md','r')
 
 json_data = {
@@ -23,4 +20,3 @@ req = requests.Request('POST',url,headers={'Content-Type':'application/json'},da
 prepared = req.prepare()
 s = requests.Session()
 s.send(prepared)
-print(dir(s))

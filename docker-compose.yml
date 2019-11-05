@@ -1,39 +1,47 @@
+version: '2.1'
+services:
+  blogapp:
+    container_name: "blogapp"
+    build: .
+    environment:
+      - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
+    expose: 
+      - 8000
+    env_file: .env
+    depends_on:
+      dbserver:
+        condition: service_healthy
 
-blogapp:
-  container_name: "blogapp"
-  build: .
-  links:
-  - dbserver
-  environment:
-    - DATABASE_URL=mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@dbserver/${MYSQL_DATABASE}
-  expose: 
-    - 8000
-  env_file: .env
+  dbserver:
+    container_name: "mysql_db_server"
+    image: mysql/mysql-server:5.7
+    environment: 
+      - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_RANDOM_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./my-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
 
-dbserver:
-  container_name: "mysql_db_server"
-  image: mysql/mysql-server:5.7
-  environment: 
-    - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_RANDOM_ROOT_PASSWORD}
-    - MYSQL_DATABASE=${MYSQL_DATABASE}
-    - MYSQL_USER=${MYSQL_USER}
-    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-  ports:
-    - 3306:33060
-  volumes:
-    - my-data:/var/lib/mysql
-nginx:
-  restart: always
-  image: nginx
-  volumes:
-    - ./nginx/:/etc/nginx/conf.d
-    - ./app/static:/app/static
-  links:
-    - blogapp
-  ports:
-      - 80:80
-  environment: 
-    - USE_LISTEN_PORT=${USE_LISTEN_PORT}
-    - USE_STATIC_PATH=${USE_STATIC_PATH}
-    - NGINX_LOGS=${NGINX_LOGS}
-    - USE_STATIC_URL=${USE_STATIC_URL}
+  nginx:
+    restart: always
+    image: nginx
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+      - ./app/static:/app/static
+    links:
+      - blogapp
+    ports:
+        - 80:80
+    environment: 
+      - USE_LISTEN_PORT=${USE_LISTEN_PORT}
+      - USE_STATIC_PATH=${USE_STATIC_PATH}
+      - NGINX_LOGS=${NGINX_LOGS}
+      - USE_STATIC_URL=${USE_STATIC_URL}
