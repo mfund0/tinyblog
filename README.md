@@ -1,4 +1,4 @@
-# Tinyflaskblog
+# tinyblog
 
 Running the blog (assumption: docker & docker compose are installed):
 ```sh
